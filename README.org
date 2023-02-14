@@ -177,11 +177,17 @@ En este punto prefiero inmediatamente editarlo en tal sentido:
 
 #+BEGIN_QUOTE
 net-misc/networkmanager	tools wifi
+
 net-wireless/wpa_supplicant	tkip
+
 >=media-libs/libvpx-1.11.0 postproc
+
 media-libs/libsndfile minimal
+
 media-video/ffmpeg libv4l lv2 mp3 openal opencl opengl oss pulseaudio v4l x264 x265 xvid
+
 media-gfx/imagemagick corefonts fpx jpeg opencl webp# required by dev-python/PyQtWebEngine-5.15.5::gentoo
+
 app-editors/emacs alsa cairo gtk gui imagemagick jpeg libxml2 png sound sqlite xft 
 #+END_QUOTE
 
