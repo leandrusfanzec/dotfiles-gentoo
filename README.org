@@ -29,7 +29,9 @@ En este aspecto he preferido utilizar siempre un USB en el cual creo una tabla d
 
 Luego utilizo el comando dd con la opción de mostrar el estatus del progreso de la tarea:
 
+#+BEGIN_QUOTE
 # dd if=nombredelaiso.iso of=/dev/nombredeldisco status=progress
+#+END_QUOTE
 
 ** Particiones de Disco
 
@@ -41,16 +43,22 @@ Luego se deberá formatear con un determinado Filesystem las particiones que hem
 
 Damos formato a la partición Root:
 
+#+BEGIN_QUOTE
 # mkfs.ext4 /dev/sda3 
+#+END_QUOTE
 
 Damos formato a la partición Boot:
 
+#+BEGIN_QUOTE
 # mkfs.ext4 /dev/sda1
+#+END_QUOTE
 
 Luego activamos la partición Swap:
 
+#+BEGIN_QUOTE
 # mkswap /dev/sda2
 # swapon /dev/sda2
+#+END_QUOTE
 
 Luego de eso el manual dice que hay que montar la partición Root, siga las instrucciones que ahí se señalan, incluyendo aquellas recomendaciones respecto de que esté utilizando una distribución no-Gentoo para hacer la instalación.
 
@@ -70,29 +78,42 @@ En este punto recomiendo utilizar las herramientas que señala [[https://github.
 
 Me refiero en específico:
 
+#+BEGIN_QUOTE
 # gcc -c -Q -march=native --help=target | awk '/^  -march=/ {print $2}'
+#+END_QUOTE
 
+#+BEGIN_QUOTE
 # lscpu | awk '/^CPU\(s\):/ {print $2}'
+#+END_QUOTE
+
 
 Para las configuraciones de USE (hay que instalarla antes):
 
+#+BEGIN_QUOTE
 # ufed
+#+END_QUOTE
 
 Y, también (también hay que instalarla antes):
 
+#+BEGIN_QUOTE
 # cpuid2cpuflags
+#+END_QUOTE
 
 ** Instalando la Base de Gentoo
 
 Para seleccionar las mejores Mirrors recomiendo también lo que indica Barroso en su guía:
 
+#+BEGIN_QUOTE
 # mirrorselect -D -s4 -o >> /mnt/gentoo/etc/portage/make.conf
+#+END_QUOTE
 
 Luego se sigue exactamente lo que señala el Handbook con la única diferencia que cuando se refiera a utilizar emerge yo prefiero siempre utilizar con la opición -aqv.
 
 Por ejemplo en el caso de "Updating the @world set" yo utilizo:
 
+#+BEGIN_QUOTE
 # emerge -aqvuDN @world
+#+END_QUOTE
 
 ** USE Flag List
 
@@ -112,32 +133,44 @@ Lo demás se sigue tal cual.
 
 En este punto yo instalo el firmware y también intel-microcode y genkernel todo junto:
 
+#+BEGIN_QUOTE
 # emerge -aqv sys-kernel/gentoo-sources sys-kernel/genkernel sys-kernel/linux-firmware sys-firmware/intel-microcode
+#+END_QUOTE
 
 Se selecciona el Kernel:
 
+#+BEGIN_QUOTE
 # eselect kernel list
 # eselect kernel set 1
+#+END_QUOTE
 
 Para utilizar la herramienta Genkernel se debe primero configurar el Fstab en el cual prefiero ya en ese punto establecer todos los puntos de montaje:
 
+#+BEGIN_QUOTE
 # nano -w /etc/fstab
+#+END_QUOTE
 
 En este punto se utilizará la herramienta blkid para conseguir los UUID de las particiones. Se recomienda utilizar éstas antes que los nombres "sdx".
 
 Despues de eso se puede utilizar la herramienta Genkernel:
 
+#+BEGIN_QUOTE
 # genkernel --microcode all
+#+END_QUOTE
 
 ** Network
 
 En este punto debemos configurar el Hostname:
 
+#+BEGIN_QUOTE
 # echo Nombredelequipo > /etc/hostname
+#+END_QUOTE
 
 Antes de proseguir con las instalaciones, y dado que NetworkManager instala wpa-supplicant, se necesita activar la USE flag específica para que identifique mi red en package.use:
 
-# nano /etc/protage/package.use/crearnombrearchivo
+#+BEGIN_QUOTE
+# nano /etc/portage/package.use/crearnombrearchivo
+#+END_QUOTE
 
 En este punto prefiero inmediatamente editarlo en tal sentido:
 
@@ -153,21 +186,29 @@ app-editors/emacs alsa cairo gtk gui imagemagick jpeg libxml2 png sound sqlite x
 
 Instalamos el Dhcpcd y NetWorkManager:
 
+#+BEGIN_QUOTE
 # emerge -aqv net-misc/dhcpcd net-misc/networkmanager
+#+END_QUOTE
 
 Sin embargo, _yo no lo activo_ en el init.
 
 Activamos Networkmanager al init:
 
+#+BEGIN_QUOTE
 # rc-update add NetworkManager default
+#+END_QUOTE
 
 Despues configuramos el archivo hosts:
 
+#+BEGIN_QUOTE
 # nano /etc/hosts
+#+END_QUOTE
 
 Simplemente le agrego una línea abajo:
 
+#+BEGIN_QUOTE
 127.0.1.1	nombredelequipo
+#+END_QUOTE
 
 Después de eso hacemos exactamente lo que señala la Handbook.
 
@@ -175,27 +216,39 @@ Después de eso hacemos exactamente lo que señala la Handbook.
 
 Instalamos todo junto:
 
+#+BEGIN_QUOTE
 # emerge -aqv app-admin/sysklogd sys-process/cronie sys-apps/mlocate sys-fs/dosfstools
+#+END_QUOTE
 
 Luego lo configuramos para que inície con nuestro init:
 
+#+BEGIN_QUOTE
 # rc-update add sysklogd default
 # rc-update add cronie default
+#+END_QUOTE
 
 ** Bootloader
 
 Instalamos Grub:
 
+#+BEGIN_QUOTE
 # emerge -aqv sys-boot/grub
 # grub-install /dev/sda
+#+END_QUOTE
+
 Tener presente la opción --target=i386-pc, si el grup trata de instalar efi-64
+
+#+BEGIN_QUOTE
 # grub-mkconfig -o /boot/grub/grub.cfg
+#+END_QUOTE
 
 ** Creación Usuario
 
 Aqui se tiene que agregar la opción que exige NetworkManager(plugdev):
 
+#+BEGIN_QUOTE
 # useradd -m -G users,wheel,audio,usb,video,plugdev -s /bin/bash nombreusuario
+#+END_QUOTE
 
 * Cuarta Parte
 
@@ -204,13 +257,18 @@ Aqui se tiene que agregar la opción que exige NetworkManager(plugdev):
 Antes de instalar xorg debemos preocuparnos de Elogind.
 Dado que ya lo hemos declarado en nuestro make.conf, solamete nos quedaría activarlo en nuestro init:
 
+#+BEGIN_QUOTE
 # rc-update add elogind boot
+#+END_QUOTE
 
 Esto es importante dado que que sin esto xorg no inicia.
 
 Instalamos xorg y algunos paquetes que vamos a necesitar que lo he sacado de [[https://github.com/MentalOutlaw/gentootestscript/blob/master/dependencies.txt][Mental Outlaw]], y aprovechamos que se demorará mucho podemos hacer instalar todo lo demás que se nos ocurra:
 
+#+BEGIN_QUOTE
 # emerge -aqv x11-base/xorg-server x11-libs/libX11 x11-libs/libXrandr x11-libs/libXinerama x11-libs/libXft x11-apps/xrdb x11-apps/xrandr x11-misc/unclutter x11-misc/xclip media-sound/alsa-utils media-fonts/hack app-editors/emacs x11-misc/redshift x11-apps/xset x11-apps/setxkbmap x11-misc/xcompmgr x11-misc/xwallpaper dev-vcs/git app-shells/fzf
+#+END_QUOTE
+
 
 ** Configurando DWM
 
@@ -218,50 +276,64 @@ En este punto debemos recordar que esto es una guía respecto a mis configuracio
 
 Debemos descargar algunas configuraciones que ya tengo en un repositorio:
 
+#+BEGIN_QUOTE
 # mkdir /home/nombreusuario/.src
 # cd /home/nombreusuario/.src
 # git clone https://github.com/lucascfernandez/gentoofiles.git
 # cd gentoofiles
+#+END_QUOTE
 
 Aqui encontraremos algunas configuraciones para el inicio de DWM:
 
+#+BEGIN_QUOTE
 # cp X/.xinitrc /home/nombreusuario
 # cp X/.bashrc /home/nombreusuario
 # cp X/.bash_profile /home/nombreusuario
 # cp X/startdwm /home/nombreusuario/.src
 # cp X/xprofile /home/nombreusuario/.src
+#+END_QUOTE
 
 Luego tenemos que instalar dwm y demás utilitários del gestor de ventanas:
 
+#+BEGIN_QUOTE
 # cd /home/nombreusuario/.src/gentoofiles/dwm
 # make clean install
 # cd /home/nombreusuario/.src/gentoofiles/dmenu
 # make clean install
+#+END_QUOTE
 
 Los programas St y Slstatus se deben descargar y utilizar las confiraciones que tengo separadas.
 
 Primero St:
 
+#+BEGIN_QUOTE
 # cd /home/nombreusuario/.src
 # git clone https://git.suckless.org/st
 # cp /home/nombreusuario/.src/gentoofiles/st/congig.h /home/nombreusuario/.src/st
 # cd /home/nombreusuario/.src/st
 # make clean install
+#+END_QUOTE
 
 Ahora Slstatus:
 
+#+BEGIN_QUOTE
 # cd /home/nombreusuario/.src
 # git clone https://git.suckless.org/slstatus
 # cp /home/nombreusuario/.src/gentoofiles/slstatus/congig.h /home/nombreusuario/.src/slstatus
 # cd /home/nombreusuario/.src/slstatus
 # make clean install
+#+END_QUOTE
 
 ** Final
 
 Solamente quedaría instalar los demás programas de uso cotidiano:
 
+#+BEGIN_QUOTE
 # emerge -aqv media-video/mpv net-misc/yt-dlp www-client/firefox app-office/libreoffice
+#+END_QUOTE
 
 Por último es bueno quitar el beep que siempre viene por defecto con:
 
+#+BEGIN_QUOTE
 # rmmod pcspkr
+#+END_QUOTE
