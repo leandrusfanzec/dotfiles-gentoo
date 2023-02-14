@@ -337,3 +337,5 @@ Por último es bueno quitar el beep que siempre viene por defecto con:
 #+BEGIN_QUOTE
 # rmmod pcspkr
 #+END_QUOTE
+
+Y con esto tenemos gran parte del trabajo realizado.
