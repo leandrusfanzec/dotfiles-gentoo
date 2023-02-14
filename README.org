@@ -240,6 +240,7 @@ Instalamos Grub:
 
 #+BEGIN_QUOTE
 emerge -aqv sys-boot/grub
+
 grub-install /dev/sda
 #+END_QUOTE
 
