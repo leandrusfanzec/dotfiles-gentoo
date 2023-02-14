@@ -57,6 +57,9 @@ Luego activamos la partición Swap:
 
 #+BEGIN_QUOTE
 mkswap /dev/sda2
+#+END_QUOTE
+
+#+BEGIN_QUOTE
 swapon /dev/sda2
 #+END_QUOTE
 
