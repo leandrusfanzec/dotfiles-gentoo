@@ -63,7 +63,6 @@ swapon /dev/sda2
 Luego de eso el manual dice que hay que montar la partición Root, siga las instrucciones que ahí se señalan, incluyendo aquellas recomendaciones respecto de que esté utilizando una distribución no-Gentoo para hacer la instalación.
 
 * Segunda Parte
-
 ** Intalando Stage3
 
 En este aspecto yo sigo las mismas intrucciones, configurando manualmente la /date/.
@@ -128,7 +127,6 @@ Respecto a las licencias debes elegir que prefieres, para no hacerlo complicado 
 Lo demás se sigue tal cual.
 
 * Tercera Parte
-
 ** Kernel
 
 En este punto yo instalo el firmware y también intel-microcode y genkernel todo junto:
@@ -251,7 +249,6 @@ useradd -m -G users,wheel,audio,usb,video,plugdev -s /bin/bash nombreusuario
 #+END_QUOTE
 
 * Cuarta Parte
-
 ** Xorg
 
 Antes de instalar xorg debemos preocuparnos de Elogind.
@@ -269,7 +266,6 @@ Instalamos xorg y algunos paquetes que vamos a necesitar que lo he sacado de [[h
 emerge -aqv x11-base/xorg-server x11-libs/libX11 x11-libs/libXrandr x11-libs/libXinerama x11-libs/libXft x11-apps/xrdb x11-apps/xrandr x11-misc/unclutter x11-misc/xclip media-sound/alsa-utils media-fonts/hack app-editors/emacs x11-misc/redshift x11-apps/xset x11-apps/setxkbmap x11-misc/xcompmgr x11-misc/xwallpaper dev-vcs/git app-shells/fzf
 #+END_QUOTE
 
-
 ** Configurando DWM
 
 En este punto debemos recordar que esto es una guía respecto a mis configuraciones personales y mucho de los archivos que se desglosan aquí están sobre la base de un usuario denominado "lucas". Tenerlo presente al momento de copiar los archivos.
@@ -278,8 +274,17 @@ Debemos descargar algunas configuraciones que ya tengo en un repositorio:
 
 #+BEGIN_QUOTE
 mkdir /home/nombreusuario/.src
+#+END_QUOTE
+
+#+BEGIN_QUOTE
 cd /home/nombreusuario/.src
+#+END_QUOTE
+
+#+BEGIN_QUOTE
 git clone https://github.com/lucascfernandez/gentoofiles.git
+#+END_QUOTE
+
+#+BEGIN_QUOTE
 cd gentoofiles
 #+END_QUOTE
 
@@ -287,9 +292,21 @@ Aqui encontraremos algunas configuraciones para el inicio de DWM:
 
 #+BEGIN_QUOTE
 cp X/.xinitrc /home/nombreusuario
+#+END_QUOTE
+
+#+BEGIN_QUOTE
 cp X/.bashrc /home/nombreusuario
+#+END_QUOTE
+
+#+BEGIN_QUOTE
 cp X/.bash_profile /home/nombreusuario
+#+END_QUOTE
+
+#+BEGIN_QUOTE
 cp X/startdwm /home/nombreusuario/.src
+#+END_QUOTE
+
+#+BEGIN_QUOTE
 cp X/xprofile /home/nombreusuario/.src
 #+END_QUOTE
 
@@ -297,8 +314,17 @@ Luego tenemos que instalar dwm y demás utilitários del gestor de ventanas:
 
 #+BEGIN_QUOTE
 cd /home/nombreusuario/.src/gentoofiles/dwm
+#+END_QUOTE
+
+#+BEGIN_QUOTE
 make clean install
+#+END_QUOTE
+
+#+BEGIN_QUOTE
 cd /home/nombreusuario/.src/gentoofiles/dmenu
+#+END_QUOTE
+
+#+BEGIN_QUOTE
 make clean install
 #+END_QUOTE
 
@@ -308,9 +334,22 @@ Primero St:
 
 #+BEGIN_QUOTE
 cd /home/nombreusuario/.src
+#+END_QUOTE
+
+#+BEGIN_QUOTE
 git clone https://git.suckless.org/st
+#+END_QUOTE
+
+
+#+BEGIN_QUOTE
 cp /home/nombreusuario/.src/gentoofiles/st/congig.h //home/nombreusuario/.src/st
+#+END_QUOTE
+
+#+BEGIN_QUOTE
 cd /home/nombreusuario/.src/st
+#+END_QUOTE
+
+#+BEGIN_QUOTE
 make clean install
 #+END_QUOTE
 
@@ -318,9 +357,23 @@ Ahora Slstatus:
 
 #+BEGIN_QUOTE
 cd /home/nombreusuario/.src
+#+END_QUOTE
+
+
+#+BEGIN_QUOTE
 git clone https://git.suckless.org/slstatus
+#+END_QUOTE
+
+#+BEGIN_QUOTE
 cp /home/nombreusuario/.src/gentoofiles/slstatus/congig.h /home/nombreusuario/.src/slstatus
+#+END_QUOTE
+
+#+BEGIN_QUOTE
 cd /home/nombreusuario/.src/slstatus
+#+END_QUOTE
+
+
+#+BEGIN_QUOTE
 make clean install
 #+END_QUOTE
 
