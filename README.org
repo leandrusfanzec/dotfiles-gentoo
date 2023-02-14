@@ -282,11 +282,11 @@ En este punto debemos recordar que esto es una guía respecto a mis configuracio
 Debemos descargar algunas configuraciones que ya tengo en un repositorio:
 
 #+BEGIN_QUOTE
-mkdir /home/nombreusuario/.src
+mkdir /home/nombreusuario//.src
 #+END_QUOTE
 
 #+BEGIN_QUOTE
-cd /home/nombreusuario/.src
+cd /home/nombreusuario//.src
 #+END_QUOTE
 
 #+BEGIN_QUOTE
@@ -312,17 +312,17 @@ cp X/.bash_profile /home/nombreusuario
 #+END_QUOTE
 
 #+BEGIN_QUOTE
-cp X/startdwm /home/nombreusuario/.src
+cp X/startdwm /home/nombreusuario//.src
 #+END_QUOTE
 
 #+BEGIN_QUOTE
-cp X/xprofile /home/nombreusuario/.src
+cp X/xprofile /home/nombreusuario//.src
 #+END_QUOTE
 
 Luego tenemos que instalar dwm y demás utilitários del gestor de ventanas:
 
 #+BEGIN_QUOTE
-cd /home/nombreusuario/.src/gentoofiles/dwm
+cd /home/nombreusuario//.src/gentoofiles/dwm
 #+END_QUOTE
 
 #+BEGIN_QUOTE
@@ -330,7 +330,7 @@ make clean install
 #+END_QUOTE
 
 #+BEGIN_QUOTE
-cd /home/nombreusuario/.src/gentoofiles/dmenu
+cd /home/nombreusuario//.src/gentoofiles/dmenu
 #+END_QUOTE
 
 #+BEGIN_QUOTE
@@ -342,7 +342,7 @@ Los programas St y Slstatus se deben descargar y utilizar las confiraciones que 
 Primero St:
 
 #+BEGIN_QUOTE
-cd /home/nombreusuario/.src
+cd /home/nombreusuario//.src
 #+END_QUOTE
 
 #+BEGIN_QUOTE
@@ -351,11 +351,11 @@ git clone https://git.suckless.org/st
 
 
 #+BEGIN_QUOTE
-cp /home/nombreusuario/.src/gentoofiles/st/congig.h //home/nombreusuario/.src/st
+cp /home/nombreusuario//.src/gentoofiles/st/congig.h //home/nombreusuario//.src/st
 #+END_QUOTE
 
 #+BEGIN_QUOTE
-cd /home/nombreusuario/.src/st
+cd /home/nombreusuario//.src/st
 #+END_QUOTE
 
 #+BEGIN_QUOTE
@@ -365,7 +365,7 @@ make clean install
 Ahora Slstatus:
 
 #+BEGIN_QUOTE
-cd /home/nombreusuario/.src
+cd /home/nombreusuario//.src
 #+END_QUOTE
 
 
@@ -374,11 +374,11 @@ git clone https://git.suckless.org/slstatus
 #+END_QUOTE
 
 #+BEGIN_QUOTE
-cp /home/nombreusuario/.src/gentoofiles/slstatus/congig.h /home/nombreusuario/.src/slstatus
+cp /home/nombreusuario//.src/gentoofiles/slstatus/congig.h /home/nombreusuario//.src/slstatus
 #+END_QUOTE
 
 #+BEGIN_QUOTE
-cd /home/nombreusuario/.src/slstatus
+cd /home/nombreusuario//.src/slstatus
 #+END_QUOTE
 
 
