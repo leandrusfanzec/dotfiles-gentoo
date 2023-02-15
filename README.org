@@ -5,6 +5,9 @@
 
 * Presentación
 
+#+ATTR_HTML: :width 70%
+[[file:screen.png]]
+
 Es una guía para la instalación de gentoo en mis laptops personales los cuales son los siguientes:
 
 - Thinkpad T420
@@ -347,7 +350,7 @@ cd /home/nombreusuario//.src
 #+END_QUOTE
 
 #+BEGIN_QUOTE
-git clone https://git.suckless.org/st
+git clone https://github.com/LukeSmithxyz/st.git
 #+END_QUOTE
 
 
@@ -387,12 +390,12 @@ cd /home/nombreusuario//.src/slstatus
 make clean install
 #+END_QUOTE
 
-** Final
+** Pos-Instalación
 
 Solamente quedaría instalar los demás programas de uso cotidiano:
 
 #+BEGIN_QUOTE
-emerge -aqv media-video/mpv net-misc/yt-dlp www-client/firefox app-office/libreoffice
+emerge -aqv media-video/mpv net-misc/yt-dlp www-client/firefox app-office/libreoffice app-text/zathura-pdf-poppler media-gfx/sxiv
 #+END_QUOTE
 
 Por último es bueno quitar el beep que siempre viene por defecto con:
@@ -402,3 +405,50 @@ rmmod pcspkr
 #+END_QUOTE
 
 Y con esto tenemos gran parte del trabajo realizado.
+
+Configurar zathura como lector de pdf:
+
+#+BEGIN_QUOTE
+xdg-mime default org.pwmt.zathura-pdf-poppler.desktop application/pdf
+#+END_QUOTE
+
+Luego agregamos --fork en el archivo:
+
+#+BEGIN_QUOTE
+/usr/share/applications/org.pwmt.zathura.desktop
+#+END_QUOTE
+
+La línea debiese quedar así:
+
+#+BEGIN_QUOTE
+Exec=zathura --fork %U
+#+END_QUOTE
+
+** Uso diario
+
+*** Mantener el Sistema Actualizado
+
+Para actualizar tener presente los siguientes comandos:
+
+Primero, actualizamos los repositorios:
+#+BEGIN_QUOTE
+emaint -a sync
+#+END_QUOTE
+
+Luego, actualizamos todos los paquetes:
+
+#+BEGIN_QUOTE
+emerge -aqvuDN @world
+#+END_QUOTE
+
+*** Indexar Archivos
+
+Dado que ya hemos instalado mlocate debemos periódicamente actualizar los archivos indexados:
+
+#+BEGIN_QUOTE
+updatedb
+#+END_QUOTE
+
+Lo ideal es agregar ese comando en cron para que lo haga automáticamente.
+
+Con eso ya podemos hacer nuestras búsquedas con locate /nombredelarchivo/.
