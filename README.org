@@ -8,19 +8,21 @@
 #+ATTR_HTML: :width 70%
 [[file:screen.png]]
 
-Es una guía para la instalación de gentoo en mis laptops personales los cuales son los siguientes:
+Lo que a continuación se desarrolla es una guía de instalación de Gentoo que utilizo en mis laptops personales, los cuales son los siguientes:
 
 - Thinkpad T420
 - Thinkpad X200
 
-La instalación se hace con las siguientes específicaciones generales:
+La instalación, que se podría considerar como la más básica y amigable (es decir, no se hace nada muy loco o aventurado), se hace con las siguientes especificaciones generales:
 
-- Particiones Tradiciones para MBR (sda1:Boot, sda2:Ram, sda3:Root)
+- Particiones tradiciones para MBR (sda1:Boot, sda2:Ram, sda3:Root)
 - init: Openrc
 - Red: NetworkManager (por la herramienta nmtui)
 - Gestor de Ventanas: DWM
 
-Por último, cabe señalar que lo que está desarrollado aqui es para uso personal, y si bien puede ser de provecho para muchos lectores, no es algo que se debe simplemente copiar y pegar, dado que está creado para mi uso personal y respecto de mis equipos personales.
+Por último, cabe señalar que, lo que está desarrollado aqui es para uso personal, y si bien puede ser de provecho para muchos lectores, no es algo que se debe simplemente copiar y pegar, dado que está creado para mi uso y respecto de mis equipos personales, por lo que se recomienda discreción.
+
+Esta guía debe ser leída con la [[https://wiki.gentoo.org/wiki/Handbook:AMD64][Handbook amd64 oficial de Gentoo]] a la vista, como pilar fundamental.
 
 * Primera Parte
 
@@ -141,10 +143,11 @@ En este punto yo instalo el firmware y también intel-microcode y genkernel todo
 emerge -aqv sys-kernel/gentoo-sources sys-kernel/genkernel sys-kernel/linux-firmware sys-firmware/intel-microcode
 #+END_QUOTE
 
-Se selecciona el Kernel:
+Seleccionamos el Kernel:
 
 #+BEGIN_QUOTE
 eselect kernel list
+
 eselect kernel set 1
 #+END_QUOTE
 
@@ -452,3 +455,16 @@ updatedb
 Lo ideal es agregar ese comando en cron para que lo haga automáticamente.
 
 Con eso ya podemos hacer nuestras búsquedas con locate /nombredelarchivo/.
+
+*** Activar SSH
+
+Activamos el demonio de openssh con:
+
+#+BEGIN_QUOTE
+doas rc-update add sshd default
+
+doas rc-service sshd start
+#+END_QUOTE
+
+
+
