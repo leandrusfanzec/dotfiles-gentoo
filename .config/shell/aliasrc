@@ -1,0 +1,34 @@
+#!/bin/sh
+
+
+# Verbosity and settings that you pretty much just always are going to want.
+alias \
+    cp="cp -iv" \
+    mv="mv -iv" \
+    rm="rm -vI" \
+    mkd="mkdir -pv" \
+    yt="yt-dlp --embed-metadata -i" \
+    yta="yt -x -f bestaudio/best" \
+    ffmpeg="ffmpeg -hide_banner"
+
+# Colorize commands when possible.
+
+alias \
+    ls="ls -hN --color=auto --group-directories-first" \
+    grep="grep --color=auto" \
+    diff="diff --color=auto" \
+    ip="ip -color=auto"
+
+# These common commands are just too long! Abbreviate them.
+alias \
+    e="doas emerge" \
+    eu="doas emaint -a sync && doas emerge -aqvuDN @world" \
+    ka="killall" \
+    ll="ls -al" \
+    g="git" \
+    v="$EDITOR" \
+    z="zathura" \
+    zotero="flatpak run org.zotero.Zotero" \
+    onlyoffice="flatpak run org.onlyoffice.desktopeditors" \
+    sdw="doas shutdown -h now" \
+    rb="doas reboot"
